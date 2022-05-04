@@ -1,3 +1,26 @@
+//import database setup utils
+const createDB = require('./database/utils/createDB');
+const seedDB = require('./database/utils/seedDB');
+
+//import Sequelize instance
+const db = require('./database');
+
+//sync and seed
+const syncDatabase = async () => {
+  try {
+    //the {force: true} option will clear the database tables
+    //every time we restart the server
+    //remove the option if you want the data to persist, ie: 
+    //await db.sync();
+
+    await db.sync({force: true});
+    console.log('------Synced to db--------')
+    await seedDB();
+    console.log('--------Successfully seeded db--------');
+  } catch (err) {
+    console.error('syncDB error:', err);
+  }  
+}
 
 //import express library
 const express = require("express");
@@ -40,6 +63,14 @@ const configureApp = async () => {
 };
 
 const bootApp = async () => {
+  //creates local database if it doesn't exist
+  await createDB();
+
+  //calls sync which is a Sequelize method that creates the database tables
+  //calls seedDB which will insert initial data into the tables
+  await syncDatabase();
+
+  //express setup - define routes and middleware
   await configureApp();
 };
 
