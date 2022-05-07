@@ -29,3 +29,9 @@ router.delete('/:id', ash(async(req, res) => {
   });
   res.status(200).json("Instructor deleted");
 }));
+
+// Add new instructor
+router.post('/', ash(async(req, res) => {
+  let newInstructor = await Instructor.create(req.body);
+  res.status(200).json(newInstructor);
+}));
