@@ -8,4 +8,14 @@ const { Course, Instructor } = require('../database/models');
 // them to the error-handling middleware (defined in app.js)
 const ash = require('express-async-handler');
 
+/** GET ALL INSTRUCTORS */
+router.get('/', ash(async(req, res) => {
+  let instructors = await Instructor.findAll({include: [Course]});
+  res.status(200).json(instructors);
+}));
 
+/** GET INSTRUCTOR BY ID*/
+router.get('/:id', ash(async(req, res) => {
+  let instructor = await Instructor.findByPk(req.params.id, {include: [Course]});
+  res.status(200).json(instructor);
+}));
