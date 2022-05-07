@@ -19,3 +19,13 @@ router.get('/:id', ash(async(req, res) => {
   let instructor = await Instructor.findByPk(req.params.id, {include: [Course]});
   res.status(200).json(instructor);
 }));
+
+// Delete instructor
+router.delete('/:id', ash(async(req, res) => {
+  await Instructor.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
+  res.status(200).json("Instructor deleted");
+}));
