@@ -35,3 +35,17 @@ router.post('/', ash(async(req, res) => {
   let newInstructor = await Instructor.create(req.body);
   res.status(200).json(newInstructor);
 }));
+
+// Edit instructor
+router.put('/:id', ash(async(req, res) => {
+  await Instructor.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  });
+  let instructor = await Instructor.findByPk(req.params.id, {include: [Course]});
+  res.status(201).json(instructor);
+}))
+
+// Export our router, so that it can be imported to construct our apiRouter;
+module.exports = router;
