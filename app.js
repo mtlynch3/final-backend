@@ -32,8 +32,11 @@ const app = express();
 const apiRouter = require('./routes');
 
 //initialize express server
+const cors = require('cors')
+
 const configureApp = async () => {
   // handle request data
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   //ignore browser requests for favicon file
@@ -47,6 +50,7 @@ const configureApp = async () => {
 
    // Mount apiRouter
    app.use("/api", apiRouter);
+
 
   // Handle page not found:
   // gets triggered when a request is made to
