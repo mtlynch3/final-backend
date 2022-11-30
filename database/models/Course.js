@@ -14,7 +14,13 @@ const Course = db.define("course", {
 
   location: {
     type: Sequelize.STRING
-  }
+  },
+
+  // isOpen: {
+  //   type: Sequelize.BOOLEAN,
+  //   allowNull: false,
+  //   defaultValue: true
+  // }
 
 });
 
