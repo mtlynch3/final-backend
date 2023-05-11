@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Subrouters;
-const coursesRouter = require('./courses');
-const instructorsRouter = require('./instructors');
+const tasksRouter = require("./Tasks");
+const employeesRouter = require("./Employees");
 
 // Mount our subrouters to assemble our apiRouter;
-router.use('/courses', coursesRouter);
-router.use('/instructors', instructorsRouter);
+router.use("/tasks", tasksRouter);
+router.use("/employees", employeesRouter);
 
 // Export our apiRouter, so that it can be used by our main app in app.js;
 module.exports = router;

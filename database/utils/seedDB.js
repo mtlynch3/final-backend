@@ -1,24 +1,30 @@
-const { Instructor, Course } = require('../models');
+const { Employee, Task } = require("../models");
 
 const seedDB = async () => {
-	const dummyInstructor = await Instructor.create({
-		firstname: "Melissa",
-		lastname: "Lynch",
-		department: "Computer Science"
-	});
-	const dummyInstructor2 = await Instructor.create({
-		firstname: "Kim",
-		lastname: "Kardashian"
-	});
+  const dummyEmployee = await Employee.create({
+    firstname: "Melissa",
+    lastname: "Lynch",
+    department: "Computer Science",
+  });
+  const dummyEmployee2 = await Employee.create({
+    firstname: "Walter",
+    lastname: "White",
+  });
 
-	const dummyCourse = await Course.create({
-		title: "CSCI 39548",
-        location: "C107",
-        timeslot: "W 5:35 - 8:15 PM"
-	});
+  const dummyTask = await Task.create({
+    description: "Paperwork",
+    priority: "Low",
+  });
 
-	await dummyCourse.setInstructor(dummyInstructor);
-	
-}
+
+  const dummyTask2 = await Task.create({
+    description: "Answer emails",
+    priority: "Medium",
+    isComplete: "false",
+  });
+
+  await dummyTask.setEmployee(dummyEmployee);
+  await dummyTask2.setEmployee(dummyEmployee2);
+};
 
 module.exports = seedDB;
